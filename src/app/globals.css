@@ -1,26 +1,190 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Premium Light Mode - Platinum & Marble */
+  --background: #f8f9fa;
+  --foreground: #111111;
+  
+  --card: #ffffff;
+  --card-foreground: #111111;
+  
+  --popover: #ffffff;
+  --popover-foreground: #111111;
+  
+  --primary: #111111;
+  --primary-foreground: #ffffff;
+  
+  --secondary: #f1f3f5;
+  --secondary-foreground: #111111;
+  
+  --muted: #f8f9fa;
+  --muted-foreground: #6c757d;
+  
+  --accent: #d4af37; /* Luxury Metallic Gold */
+  --accent-foreground: #ffffff;
+  
+  --destructive: #fa5252;
+  --destructive-foreground: #ffffff;
+  
+  --border: #e9ecef;
+  --input: #ced4da;
+  --ring: #d4af37;
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(229, 231, 235, 0.4);
+  --glass-blur: 16px;
+  
+  --radius-lg: 1rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
 }
 
-@theme inline {
+.dark {
+  /* Premium Dark Mode - Deep Obsidian & Liquid Gold */
+  --background: #09090b;
+  --foreground: #fafafa;
+  
+  --card: #121214;
+  --card-foreground: #fafafa;
+  
+  --popover: #121214;
+  --popover-foreground: #fafafa;
+  
+  --primary: #fafafa;
+  --primary-foreground: #09090b;
+  
+  --secondary: #1f1f23;
+  --secondary-foreground: #fafafa;
+  
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+  
+  --accent: #d4af37; /* Warm Gold */
+  --accent-foreground: #09090b;
+  
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  
+  --border: #27272a;
+  --input: #3f3f46;
+  --ring: #d4af37;
+
+  --glass-bg: rgba(18, 18, 20, 0.65);
+  --glass-border: rgba(63, 63, 70, 0.4);
+  --glass-blur: 16px;
+}
+
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-lg: var(--radius-lg);
+  --radius-md: var(--radius-md);
+  --radius-sm: var(--radius-sm);
+  
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-fade-in: fade-in 0.4s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base Body Configuration */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-x: hidden;
+}
+
+/* Glassmorphism Primitives */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.glass-navbar {
+  background: rgba(var(--background), 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+/* Custom Premium UI helpers */
+.shimmer-bg {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.gold-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #aa7c11 50%, #d4af37 100%);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #996515 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Premium Animations keyframes */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
 }
